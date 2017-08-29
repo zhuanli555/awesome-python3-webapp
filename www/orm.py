@@ -20,4 +20,5 @@ def create_pool(loop,**kw):
     )
 #封装select
 def select(sql,args,size=None):
+    pass
     
