@@ -12,7 +12,7 @@ from hashlib import md5
 # -------------
 
 # Email address
-MAILADDR = "username@163.com"
+MAILADDR = "13080634098@163.com"
 
 # Email password
 PASSWORD = "password"
@@ -198,14 +198,14 @@ def pop3(host, port, usr, pwd, use_ssl):
                 print >> buf, line
             buf.seek(0)
         except BaseException as e:
-            print "[-] Retrieve email {0} failed: {1}".format(i, e)
+            print("[-] Retrieve email {0} failed: {1}".format(i, e)) 
             continue
 
         # Read buffer
         try:
             msg = email.message_from_file(buf)
         except BaseException as e:
-            print "[-] Read buffer of email {0} failed: {1}".format(i, e)
+            print("[-] Read buffer of email {0} failed: {1}".format(i, e)) 
             continue
 
         # Parse and save email content/attachments
@@ -253,9 +253,9 @@ def imap4(host, port, usr, pwd, use_ssl):
         try:
             flags, delimiter, folder_name = list_pattern.match(folder).groups()
             folder_name = folder_name.strip('"')
-            print "[*] Handling folder: {0}".format(folder_name)
+            print ("[*] Handling folder: {0}".format(folder_name))
         except BaseException as e:
-            print "[-] Parse folder {0} failed: {1}".format(folder, e)
+            print ("[-] Parse folder {0} failed: {1}".format(folder, e))
             continue
 
         # Select and search folder
@@ -263,41 +263,41 @@ def imap4(host, port, usr, pwd, use_ssl):
             conn.select(folder_name, readonly=True)
             type_, data = conn.search(None, "ALL")
         except BaseException as e:
-            print "[-] Search folder {0} failed: {1}".format(folder_name, e)
+            print ("[-] Search folder {0} failed: {1}".format(folder_name, e))
             continue
 
         # Get email number of this folder
         try:
             msg_id_list = [int(i) for i in data[0].split()]
             msg_num = len(msg_id_list)
-            print "[*] {0} emails found in {1} ({2})".format(msg_num, usr, folder_name)
+            print( "[*] {0} emails found in {1} ({2})".format(msg_num, usr, folder_name))
         except BaseException as e:
-            print "[-] Can't get email number of {0}: {1}".format(folder_name, e)
+            print( "[-] Can't get email number of {0}: {1}".format(folder_name, e))
             continue
 
         # Get email content and attachments
         for i in msg_id_list:
-            print "[*] Downloading email {0}/{1}".format(i, msg_num)
+            print( "[*] Downloading email {0}/{1}".format(i, msg_num))
 
             # Get email message
             try:
                 type_, data = conn.fetch(i, "(RFC822)")
                 msg = email.message_from_string(data[0][1])
             except BaseException as e:
-                print "[-] Retrieve email {0} failed: {1}".format(i, e)
+                print( "[-] Retrieve email {0} failed: {1}".format(i, e))
                 continue
 
             # If message already exist, skip this message
             try:
                 msg_md5 = md5(data[0][1]).hexdigest()
                 if msg_md5 in download_hash:
-                    print "[-] This email has been downloaded in other folder"
+                    print ("[-] This email has been downloaded in other folder")
                     continue
                 else:
                     download_hash.append(msg_md5)
                     download_num += 1
             except BaseException as e:
-                print "[-] Parse message md5 failed: {0}".format(e)
+                print( "[-] Parse message md5 failed: {0}".format(e))
                 continue
 
             # Parse and save email content/attachments
