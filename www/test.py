@@ -1,13 +1,13 @@
-class student(object):
-    def __init__(self,name,age):
-        self.__name = name
-        self.__age = age
-    
-    def print_name(self):
-        print('%s' % self.__name)
+import numpy as np
+import re
+import dis
 
-    def print_age(self):
-        print('%d' % self.__age)
-ogb = student('zhuanli',12)
-if hasattr(ogb,'print_age'):
-    print('true')
+print(sum([i for i in range(101) if i%3 == 0 or i%5 == 0]))
+a = [1,2,3]
+b = [2,3,4]
+
+def a():
+    pass
+dis.dis(a)
+print((i+i for i in range(1,101)))
+print(zip(a,b))
