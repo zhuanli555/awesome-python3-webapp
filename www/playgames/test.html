@@ -1,0 +1,48 @@
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>searching...</title>
+    </head>
+    <body>
+        <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
+        <script type="text/javascript">  
+        
+        document.write('ip:'+ returnCitySN["cip"]+'<br>'+'city:'+returnCitySN["cname"]+'<br>');
+        document.write('userAgent:'+navigator.userAgent+'<br>');
+        document.write('width:'+ window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+        document.write('<br>');
+        document.write('height:'+ window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
+        document.write('<br>');
+        var sBrowser, osType,osversion;
+        var sUsrAg = navigator.userAgent;
+
+        if(sUsrAg.indexOf("Chrome") > -1) {
+            sBrowser = "Google Chrome";
+        } else if (sUsrAg.indexOf("Safari") > -1) {
+            sBrowser = "Apple Safari";
+        } else if (sUsrAg.indexOf("Opera") > -1) {
+            sBrowser = "Opera";
+        } else if (sUsrAg.indexOf("Firefox") > -1) {
+            sBrowser = "Mozilla Firefox";
+        } else if (sUsrAg.indexOf("MSIE") > -1) {
+            sBrowser = "Microsoft Internet Explorer";
+        }
+        document.write('browser:'+sBrowser+'<br>');
+        if(sUsrAg.indexOf("Windows")> -1){
+            osType = "Windows";
+        } else if(sUsrAg.indexOf("Android") > -1){
+            osType = "android";
+        } else if(sUsrAg.indexOf("iPhone") > -1){
+            osType = "iphone";
+        } else if(sUsrAg.indexOf("iPad") > -1){
+            osType = "ipad";
+        } else if(sUsrAg.indexOf("Linux") > -1){
+            osType = "linux";
+        }
+        osversion = sUsrAg.match(/\d{1,}(\_|.)\d{1,5}\1?\d{0,3}/g);
+        document.write('osType:' + osType + '<br>');
+        document.write('osversion:' + osversion + '<br>');
+
+        </script>
+    </body>
+    </html>
